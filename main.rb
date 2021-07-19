@@ -27,16 +27,19 @@ class Tree
   # has root instance variable
     @array = array
     @root = root
-    puts "initialized!"
   end
 
   # build_tree(array, start = nil, end = nil)
-  def build_tree(array = nil)
-    puts "build_tree!"
+  def build_tree(array = nil, start_index = nil, end_index = nil)
+    # sort array
+    @array = @array.sort
+    # remove duplicates in array
+    @array = @array.uniq
     puts @array
-    # array.sort
-    # array.uniq
-    # return nil 
+    start_index = 0
+    end_index = 1
+    # create termination condition of recursion: return nil if start_index is greater than end_index
+    return nil if (start_index > end_index)
     # start = 0
     # end = array.length - 1
     # middle = (start + end) / 2
@@ -47,5 +50,5 @@ class Tree
   end
 end
 
-test = Tree.new([2, 4])
-test.build_tree
+test = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+test.build_tree(@array)
