@@ -29,20 +29,23 @@ class Tree
     @root = root
   end
 
-  # build_tree(array, start = nil, end = nil)
-  def build_tree(array = nil, start_index = nil, end_index = nil)
+  # build_tree(array, start_index = nil, end = nil)
+    # set variable start_index to 0
+    # set end_index to = array.length - 1
+  def build_tree(array, start_index = 0, end_index = 0)
     # sort array
     @array = @array.sort
     # remove duplicates in array
     @array = @array.uniq
-    puts @array
-    start_index = 0
-    end_index = 1
+    end_index = @array.length - 1
+    p "end_index: #{end_index}"
+    p "array: #{@array}"
+
     # create termination condition of recursion: return nil if start_index is greater than end_index
     return nil if (start_index > end_index)
-    # start = 0
-    # end = array.length - 1
     # middle = (start + end) / 2
+    middle_index = (start_index + end_index) / 2
+    p "middle_index: #{middle_index}"
     # Create a Node with middle of the array as the root.
     # To the left of the root, call build_tree with arguments of array, start, and middle - 1
     # To the left of the root, call build_tree with arguments of array, start, and middle - 1
