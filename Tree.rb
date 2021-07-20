@@ -1,4 +1,9 @@
 require 'pry-byebug'
+# Build a balanced BST
+  # Get the Middle of the array and make it root.
+  # Recursively do same for left half and right half.
+      # Get the middle of left half and make it left child of the root
+      # Get the middle of right half and make it right child of the root
 
 class Tree
   attr_accessor :array, :root
