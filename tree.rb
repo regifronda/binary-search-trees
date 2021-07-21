@@ -26,7 +26,7 @@ class Tree
   def build_tree(array, start_index = 0, end_index = array.length - 1)
     array = sort_array(array)
     return nil if (start_index > end_index)
-    
+
     middle_index = (start_index + end_index) / 2
     root = Node.new(array[middle_index])
     root.left = build_tree(array, start_index, (middle_index - 1))
@@ -70,24 +70,35 @@ class Tree
     return root if root == nil
     # Otherwise continue recursing down the tree
     if value < root.data
+      p "value: #{value}"
+      p "root.data: #{root.data}"
       root.left = delete(value, root.left)
     elsif value > root.data
       root.right = delete(value, root.right)
     # If the value is the same as the node's data, that is the node to be deleted.
     else
       puts "entered else statement"
+      p "value: #{value}"
+      p "root.data: #{root.data}"
     # If the node to be deleted is the leaf, remove it from the tree.
     # If the node to be deleted only has one child, copy the child of the node and delete the child.
+
+
       if root.left == nil
+        puts "entered root.left if statement"
+        p "root.right: #{root.right}"
+        p "root.data: #{root.data}"
         root_right_placeholder = root.right
         root = nil
         return root_right_placeholder
       elsif root.right == nil
+        puts "entered root.right elsif statement"
         root_left_placeholder = root.left
         root = nil
         return root_left_placeholder
       end
     end
+    return root
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
