@@ -24,32 +24,13 @@ class Tree
     # set variable start_index to 0
     # set end_index to = array.length - 1
   def build_tree(array, start_index = 0, end_index = array.length - 1)
-    p "array in build_tree: #{array}"
-    # sort array
-    # remove duplicates in array
     array = sort_array(array)
-
-    # create termination condition of recursion: return nil if start_index is greater than end_index
     return nil if (start_index > end_index)
-    # middle = (start + end) / 2
+    
     middle_index = (start_index + end_index) / 2
-    p "start_index: #{start_index}"
-    p "end_index: #{end_index}"
-    p "middle_index: #{middle_index}"
-    p "middle index value: #{array[middle_index]}"
-    # Create a Node with middle of the array as the root.
     root = Node.new(array[middle_index])
-    p "root.data #{root.data}"
-    # To the left of the root, call build_tree with arguments of array, start, and middle_index - 1. Have middle_index - 1 as the new end_index will create a subarray and make the new middle_index the root of the subarray
     root.left = build_tree(array, start_index, (middle_index - 1))
-    p "root.left: #{root.left}"
-    p "root: #{root} root.data: #{root.data}"
-
-    # To the left of the root, call build_tree with arguments of array, middle_index + 1, end_index. Have middle_index + 1 as the new start_index will create a subarray and make the new middle_index the root of the subarray
     root.right = build_tree(array, (middle_index + 1), end_index)
-    p "root.right: #{root.right}"
-    p "root: #{root} root.data: #{root.data}"
-    p "root.data before return root: #{root.data}"
     return root
   end
 
@@ -84,14 +65,29 @@ class Tree
       # Recursively remove the node in the right subtree.
       # Copy the next biggest, delete it, and replace the node to be deleted with the next biggest.
   # To delete a node in a balanced binary search tree without unbalancing, consider several cases.
-  def delete(value, root)
+  def delete(value, root = @root)
     # Termination condition: if the tree is empty, return root
     return root if root == nil
     # Otherwise continue recursing down the tree
-    
+    if value < root.data
+      root.left = delete(value, root.left)
+    elsif value > root.data
+      root.right = delete(value, root.right)
     # If the value is the same as the node's data, that is the node to be deleted.
+    else
+      puts "entered else statement"
+    # If the node to be deleted is the leaf, remove it from the tree.
     # If the node to be deleted only has one child, copy the child of the node and delete the child.
-     
+      if root.left == nil
+        root_right_placeholder = root.right
+        root = nil
+        return root_right_placeholder
+      elsif root.right == nil
+        root_left_placeholder = root.left
+        root = nil
+        return root_left_placeholder
+      end
+    end
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
