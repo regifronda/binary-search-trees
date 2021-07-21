@@ -61,9 +61,18 @@ class Tree
   # insert method that accepts a value to insert
   def insert(value, root = @root)
     # If the subtree is empty, return a new node
+    if root == nil
+      root = Node.new(value)
+    end
     # Otherwise, continue recursing down the left subtree if the value is less than the root
+    if value < root.data
+      root.left = insert(value, root.left)
     # recurse down the right subtree if the value is greater than the root
+    elsif value > root.data
+      root.right = insert(value, root.right)
+    end
     # return root
+    return root
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
