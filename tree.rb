@@ -43,12 +43,27 @@ class Tree
     # To the left of the root, call build_tree with arguments of array, start, and middle_index - 1. Have middle_index - 1 as the new end_index will create a subarray and make the new middle_index the root of the subarray
     root.left = build_tree(array, start_index, (middle_index - 1))
     p "root.left: #{root.left}"
+    p "root: #{root} root.data: #{root.data}"
 
     # To the left of the root, call build_tree with arguments of array, middle_index + 1, end_index. Have middle_index + 1 as the new start_index will create a subarray and make the new middle_index the root of the subarray
     root.right = build_tree(array, (middle_index + 1), end_index)
     p "root.right: #{root.right}"
+    p "root: #{root} root.data: #{root.data}"
     p "root.data before return root: #{root.data}"
     return root
+  end
+
+  # To insert a value in a balanced binary search tree,
+    # Start comparing the value to the root. If smaller, go to left subtree. If greater, right subtree
+    # the inserted value will always be the leaf of a tree
+    # So, when there's no left or right subtree, place a new node for the given value.
+    
+  # insert method that accepts a value to insert
+  def insert(value, root = @root)
+    # If the subtree is empty, return a new node
+    # Otherwise, continue recursing down the left subtree if the value is less than the root
+    # recurse down the right subtree if the value is greater than the root
+    # return root
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
