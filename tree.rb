@@ -75,15 +75,19 @@ class Tree
     return root
   end
 
-  # To delete a node in a balanced binary search tree without unbalancing, consider three cases.
-    # 1) If the node to be deleted is the leaf, remove it from the tree.
-    # 2) If the node to be deleted only has one child, copy the child of the node and delete the child.
+  # To delete a node in a balanced binary search tree without unbalancing, consider several cases.
+  def delete(value, root)
+    # Termination condition: if the tree is empty, return root
+    return root if root == nil
+    # If the node to be deleted is the leaf, remove it from the tree.
+
+    # If the node to be deleted only has one child, copy the child of the node and delete the child.
       # Doing so replaces the node to be deleted with its child.
-    # 3) If the node to be deleted has two children, find the next biggest node in the tree. by first looking in its right subtree.
+    # If the node to be deleted has two children, find the next biggest node in the tree. by first looking in its right subtree.
       # In the right subtree, the node on the far left is the next biggest.
       # Recursively remove the node in the right subtree.
       # Copy the next biggest, delete it, and replace the node to be deleted with the next biggest.
-  # delete method that accepts a value of the node to delete
+  end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
