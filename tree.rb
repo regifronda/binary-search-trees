@@ -136,6 +136,8 @@ class Tree
   # level_order
   def level_order(root = @root)
     # Termination condition: return if root is nil
+    return if root.nil?
+    puts "test"
     # Create an empty array as a queue to keep track of the addresses of child nodes  that have not been visited yet
     # Enqueue the root
       # While the queue is not empty,
