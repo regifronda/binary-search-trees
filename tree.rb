@@ -89,6 +89,18 @@ class Tree
   end
 
   def find(value, root = @root)
+    if value < root.data
+      puts "entered if value < root.data"
+      root.left = find(value, root.left)
+    elsif value > root.data
+      puts "entered elsif value > root.data"
+      root.right = find(value, root.right)
+    elsif value == root.data
+      p "value == root.data"
+      p root.data
+      p root
+      return root
+    end
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
