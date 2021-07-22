@@ -142,11 +142,22 @@ class Tree
     queue = Array.new
     # Enqueue the root
     queue << @root
-      # While the queue is not empty,
+    # While the queue is not empty,
+    while queue.length > 0
       # Return the discovered node in front of the array
+      p queue[0]
       # Remove said discovered node from the array
+      node = queue.shift
+      p "node after queue.shift: #{node}"
       # Enqueue the left child
+      if node.left != nil
+        queue << node.left
+      end
       # Enqueue the right child
+      if node.right != nil
+        queue << node.right
+      end
+    end
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
