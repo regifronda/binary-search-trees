@@ -6,13 +6,14 @@ require 'pry-byebug'
       # Get the middle of right half and make it right child of the root
 
 class Tree
-  attr_accessor :array, :root
+  attr_accessor :array, :root, :find_node
   # initialize with an array
   def initialize(array)
   # has root instance variable
     @array = array
     @array = sort_array(@array)
     @root = build_tree(@array)
+    @find_node = find_node
   end
 
   def sort_array(array)
@@ -90,17 +91,23 @@ class Tree
 
   def find(value, root = @root)
     if value < root.data
-      puts "entered if value < root.data"
+      puts "entered if value > root.data"
       root.left = find(value, root.left)
     elsif value > root.data
       puts "entered elsif value > root.data"
       root.right = find(value, root.right)
     elsif value == root.data
-      p "value == root.data"
       p root.data
-      p root
+      @find_node = root
       return root
     end
+    p "root after if-else statement: #{root.data}"
+    p "find_node: #{@find_node}"
+    p "root: #{root}"
+    p "@root: #{@root}"
+    return @find_node if root == @root
+    puts "before return root"
+    return root
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
