@@ -134,18 +134,21 @@ class Tree
     # enqueue the right child
 
   # level_order
-  def level_order(root = @root)
+  def level_order
     # Termination condition: return if root is nil
     return if root.nil?
     puts "test"
     # Create an empty array as a queue to keep track of the addresses of child nodes  that have not been visited yet
+    queue = Array.new
     # Enqueue the root
+    queue << @root
       # While the queue is not empty,
       # Return the discovered node in front of the array
       # Remove said discovered node from the array
       # Enqueue the left child
       # Enqueue the right child
   end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
