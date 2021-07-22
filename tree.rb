@@ -66,33 +66,20 @@ class Tree
       # Copy the next biggest, delete it, and replace the node to be deleted with the next biggest.
   # To delete a node in a balanced binary search tree without unbalancing, consider several cases.
   def delete(value, root = @root)
-    # Termination condition: if the tree is empty, return root
     return root if root == nil
-    # Otherwise continue recursing down the tree
+    
     if value < root.data
-      p "value: #{value}"
-      p "root.data: #{root.data}"
       root.left = delete(value, root.left)
     elsif value > root.data
+      puts "entered elsif value > root.data"
       root.right = delete(value, root.right)
-    # If the value is the same as the node's data, that is the node to be deleted.
+    
     else
-      puts "entered else statement"
-      p "value: #{value}"
-      p "root.data: #{root.data}"
-    # If the node to be deleted is the leaf, remove it from the tree.
-    # If the node to be deleted only has one child, copy the child of the node and delete the child.
-
-
       if root.left == nil
-        puts "entered root.left if statement"
-        p "root.right: #{root.right}"
-        p "root.data: #{root.data}"
         root_right_placeholder = root.right
         root = nil
         return root_right_placeholder
       elsif root.right == nil
-        puts "entered root.right elsif statement"
         root_left_placeholder = root.left
         root = nil
         return root_left_placeholder
