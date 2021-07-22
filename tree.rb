@@ -57,27 +57,54 @@ class Tree
     return root
   end
 
+  def next_biggest_node(node)
+    current = node
+    # find the next biggest value by going to the far left of a subtree
+    while current.left != nil
+      current = current.left
+    end
+    return current
+  end
+
   def delete(value, root = @root)
     return root if root == nil
     
     if value < root.data
+      p "value: #{value}"
+      p "root.data: #{root.data}"
       root.left = delete(value, root.left)
     elsif value > root.data
       puts "entered elsif value > root.data"
       root.right = delete(value, root.right)
     
     else
+      puts "entered else statement"
+      p "value: #{value}"
+      p "root.data: #{root.data}"
       if root.left == nil
+        puts "entered root.left if statement"
+        p "root.right: #{root.right}"
+        p "root.data: #{root.data}"
         root_right_placeholder = root.right
         root = nil
         return root_right_placeholder
       elsif root.right == nil
+        puts "entered root.right elsif statement"
+        p "root.left: #{root.left}"
+        p "root.data: #{root.data}"
         root_left_placeholder = root.left
         root = nil
         return root_left_placeholder
       end
 
-
+      # In the case of deleting a node with two children, find the next biggest value in its right subtree
+      root_placeholder = next_biggest_node(root.right)
+      p "root_placeholder: #{root_placeholder}"
+      # Replace the node to be deleted with the next biggest
+      root.data = root_placeholder.data
+      p "root_placeholder.data: #{root_placeholder.data}"
+      # Delete the next biggest node.
+      root.right = delete(root_placeholder.data, root.right)
     end
     return root
   end
