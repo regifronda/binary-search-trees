@@ -126,20 +126,22 @@ class Tree
   def level_order
     return if root.nil?
 
-    queue = Array.new
+    discovered_nodes = Array.new
     result = Array.new
-    queue << @root
-    result << @root
+    discovered_nodes << @root
 
-    while queue.length > 0
-      node = queue.shift
+    while discovered_nodes.length > 0
+      value_to_add_to_result = discovered_nodes[0]
+      value_to_add_to_result = value_to_add_to_result.data
+      result << value_to_add_to_result
+      node = discovered_nodes.shift
       if node.left != nil
-        result << node.left
-        queue << node.left
+        # result << node.left
+        discovered_nodes << node.left
       end
       if node.right != nil
-        result << node.right
-        queue << node.right
+        # result << node.right
+        discovered_nodes << node.right
       end
     end
     p result
