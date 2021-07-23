@@ -123,41 +123,26 @@ class Tree
     return root
   end
 
-  # level order method
-    # As a node is visited, reference all its children in a queue
-    # Nodes in the queue, called discovered nodes, have their reference known but have not been visited yet
-    # Start with the root of the tree in the queue
-    # As long as the queue is not empty, 
-    # take the node from the node from the front
-    # visit the node
-    # enqueue the left child
-    # enqueue the right child
-
-  # level_order
   def level_order
-    # Termination condition: return if root is nil
     return if root.nil?
-    puts "test"
-    # Create an empty array as a queue to keep track of the addresses of child nodes  that have not been visited yet
+
     queue = Array.new
-    # Enqueue the root
+    result = Array.new
     queue << @root
-    # While the queue is not empty,
+    result << @root
+
     while queue.length > 0
-      # Return the discovered node in front of the array
-      p queue[0]
-      # Remove said discovered node from the array
       node = queue.shift
-      p "node after queue.shift: #{node}"
-      # Enqueue the left child
       if node.left != nil
+        result << node.left
         queue << node.left
       end
-      # Enqueue the right child
       if node.right != nil
+        result << node.right
         queue << node.right
       end
     end
+    p result
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
