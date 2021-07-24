@@ -66,20 +66,23 @@ class Tree
     return current
   end
 
-  # inorder traversal
-    # Traverse the left subtree
-    # visit the root
-    # traverse  the right subtree
-
-  # inorder method
-  def inorder(root = @root)
-    p root
-    # Create an array for node values
-      # Recursively travel on left child
-      # Add data of the node to array
-      # Recursively travel on right child
-
-    # Return array of values
+  def inorder
+    current = @root
+    stack = []
+    array_of_values = []
+    while true
+      if current != nil
+        stack << current
+        current = current.left
+      elsif stack != []
+        current = stack.pop
+        array_of_values << current.data
+        current = current.right
+      else
+        break
+      end
+    end
+    p array_of_values 
   end
 
   def delete(value, root = @root)
