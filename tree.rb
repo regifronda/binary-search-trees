@@ -85,6 +85,25 @@ class Tree
     p array_of_values 
   end
 
+  def preorder
+    return if root.nil?
+    current = @root
+    stack = Array.new
+    array_of_values = Array.new
+    stack << current
+    while stack != []
+      current = stack.pop
+      array_of_values << current.data
+      if current.right != nil
+        stack << current.right
+      end
+      if current.left != nil
+        stack << current.left
+      end
+    end
+    p array_of_values
+  end
+
   def delete(value, root = @root)
     return root if root == nil
     
