@@ -66,6 +66,16 @@ class Tree
     return current
   end
 
+  # inorder traversal
+    # Traverse the left subtree
+    # visit the root
+    # traverse  the right subtree
+
+  # inorder method
+    # Create an array for node values
+    # Recursively travel on left child
+    # Add data of the node to array
+    # Recursively travel on right child
   def delete(value, root = @root)
     return root if root == nil
     
