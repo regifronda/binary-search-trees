@@ -72,10 +72,16 @@ class Tree
     # traverse  the right subtree
 
   # inorder method
+  def inorder(root = @root)
+    p root
     # Create an array for node values
-    # Recursively travel on left child
-    # Add data of the node to array
-    # Recursively travel on right child
+      # Recursively travel on left child
+      # Add data of the node to array
+      # Recursively travel on right child
+
+    # Return array of values
+  end
+
   def delete(value, root = @root)
     return root if root == nil
     
