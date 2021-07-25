@@ -105,21 +105,13 @@ class Tree
   end
 
 
-  # Postorder traversal
   def postorder
-    # initialize a first array to serve as a stack for reverse postorder traversal
     reverse_postorder_stack = Array.new
-    # initialize a second array that contains the values of the nodes in postorder traversal
     values = Array.new
-    # push root to the array serving as a stack
     reverse_postorder_stack << @root
-    # Do a loop while said stack is not empty
     while reverse_postorder_stack != []
-      # Remove the last node in the first array
       current = reverse_postorder_stack.pop
-      # Add the value of the removed node to the array of values
       values << current.data
-      # push the left and right children of the removed node in the first array
       
       if current.left != nil
         reverse_postorder_stack << current.left
@@ -128,7 +120,6 @@ class Tree
         reverse_postorder_stack << current.right
       end
     end
-      # Return the array of values in reverse
     p values.reverse  
   end
 
