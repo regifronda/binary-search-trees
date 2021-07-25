@@ -104,6 +104,17 @@ class Tree
     p array_of_values
   end
 
+
+  # Postorder traversal
+    # initialize a first array to serve as a stack for reverse postorder traversal
+    # initialize a second array that contains the values of the nodes in postorder traversal
+    # push root to the array serving as a stack
+    # Do a loop while said stack is not empty
+      # Remove the last node in the first array
+      # Add the value of the removed node to the array of values
+      # push the left and right children of the removed node in the first array
+    # Return the array of values in reverse
+
   def delete(value, root = @root)
     return root if root == nil
     
