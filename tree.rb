@@ -197,6 +197,14 @@ class Tree
     return $height_global
   end
 
+  # depth method(value, root = @root)
+    # if the node is nil, return -1 as a base case
+    # initialize variable, depth_variable, and set it to -1
+    # Check if given value is equal to the current node
+    # if not, check if the given value is in the left or right subtrees through recursion
+    # If the given value is equal to the current node's value, return depth_variable + 1
+    # If not, return depth_variable
+
   def level_order
     return if root.nil?
 
