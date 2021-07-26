@@ -172,12 +172,29 @@ class Tree
     elsif value > root.data
       root.right = find(value, root.right)
     elsif value == root.data
-      p root.data
       @find_node = root
       return root
     end
     return @find_node if root == @root
     return root
+  end
+
+  def height_helper_method(value, root = @root)
+    $height_global
+    return -1 if root == nil
+    left_subtree_height = height_helper_method(value, root.left)
+    right_subtree_height = height_helper_method(value, root.right)
+    result = [left_subtree_height, right_subtree_height].max + 1
+    if root.data == value
+      $height_global = result
+    end
+      return result
+  end
+
+  def height(value, root = @root)
+    $height_global
+    tree_height = height_helper_method(value)
+    return $height_global
   end
 
   def level_order
