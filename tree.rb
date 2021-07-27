@@ -237,9 +237,12 @@ class Tree
   end
   
   # rebalance method
+  def rebalance
     # initialize variable for array returned by level_order method
+    level_order_array = level_order
     # pass said array into build_tree method
-    
+  end
+  
   def level_order
     return if root.nil?
 
