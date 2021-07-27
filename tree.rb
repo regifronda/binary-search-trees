@@ -179,11 +179,11 @@ class Tree
     return root
   end
 
-  def height_helper_method(value, root = @root)
+  def find_maximum_height(value, root = @root)
     $height_global
     return -1 if root == nil
-    left_subtree_height = height_helper_method(value, root.left)
-    right_subtree_height = height_helper_method(value, root.right)
+    left_subtree_height = find_maximum_height(value, root.left)
+    right_subtree_height = find_maximum_height(value, root.right)
     result = [left_subtree_height, right_subtree_height].max + 1
     if root.data == value
       $height_global = result
@@ -193,7 +193,7 @@ class Tree
 
   def height(value, root = @root)
     $height_global
-    tree_height = height_helper_method(value)
+    tree_height = find_maximum_height(value)
     return $height_global
   end
 
@@ -216,11 +216,22 @@ class Tree
     return depth_variable
   end
 
+  def find_subtree_height(root)
+    return 0 if root.nil?
+    return [find_subtree_height(root.left), find_subtree_height(root.right)].max + 1
+  end
+
   # balanced? method
-  def balanced?
-  
+  def balanced?(root = @root)
+    return true if root.nil?
+    
     # Find the depth of each leaf node
-    # Compare each of the leaf nodes' depths  
+    # Compare each of the leaf nodes' depths
+    left_subtree_height = find_subtree_height(root.left)
+    p "left subtree height: #{left_subtree_height}"
+    right_subtree_height = find_subtree_height(root.right)
+    p "right subtree height: #{right_subtree_height}"
+
     # if the biggest difference between the depths is at most 1, tree is balanced
   end
 
