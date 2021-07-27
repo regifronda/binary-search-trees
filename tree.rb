@@ -231,8 +231,16 @@ class Tree
     p "left subtree height: #{left_subtree_height}"
     right_subtree_height = find_subtree_height(root.right)
     p "right subtree height: #{right_subtree_height}"
-
     # if the biggest difference between the depths is at most 1, tree is balanced
+    #if (left_subtree_height - right_subtree_height).abs &&
+    if (left_subtree_height - right_subtree_height).abs <= 1 && 
+      balanced?(root.left) == true && 
+      balanced?(root.right) == true
+      return true
+    end
+
+    return false
+    #end
   end
 
   def level_order
