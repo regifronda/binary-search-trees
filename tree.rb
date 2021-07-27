@@ -198,12 +198,32 @@ class Tree
   end
 
   # depth method(value, root = @root)
+  def depth(value, root = @root)
+    puts "called depth"
     # if the node is nil, return -1 as a base case
+    return -1 if root.nil?
     # initialize variable, depth_variable, and set it to -1
+    depth_variable = -1
     # Check if given value is equal to the current node
+    if root.data == value
+      return depth_variable + 1
+    end
     # if not, check if the given value is in the left or right subtrees through recursion
     # If the given value is equal to the current node's value, return depth_variable + 1
+    
+    
+
+    depth_variable = depth(value, root.left)
+    if depth_variable >= 0
+      return depth_variable + 1
+    end
+    depth_variable = depth(value, root.right)
+    if depth_variable >= 0
+      return depth_variable + 1
+    end
     # If not, return depth_variable
+    return depth_variable
+  end
 
   def level_order
     return if root.nil?
