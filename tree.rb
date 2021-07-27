@@ -204,7 +204,7 @@ class Tree
     if root.data == value
       return depth_variable + 1
     end
-    
+
     depth_variable = depth(value, root.left)
     if depth_variable >= 0
       return depth_variable + 1
@@ -214,6 +214,14 @@ class Tree
       return depth_variable + 1
     end
     return depth_variable
+  end
+
+  # balanced? method
+  def balanced?
+  
+    # Find the depth of each leaf node
+    # Compare each of the leaf nodes' depths  
+    # if the biggest difference between the depths is at most 1, tree is balanced
   end
 
   def level_order
