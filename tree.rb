@@ -239,10 +239,13 @@ class Tree
   # rebalance method
   def rebalance
     # initialize variable for array returned by level_order method
-    level_order_array = level_order
+    @array = level_order
+    @array = sort_array(@array)
+    p "@array: #{@array}"
     # pass said array into build_tree method
+    @root = build_tree(@array)
   end
-  
+
   def level_order
     return if root.nil?
 
