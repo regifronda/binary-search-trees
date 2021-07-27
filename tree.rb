@@ -221,7 +221,6 @@ class Tree
     return [find_subtree_height(root.left), find_subtree_height(root.right)].max + 1
   end
 
-  # balanced? method
   def balanced?(root = @root)
     return true if root.nil?
     
@@ -236,7 +235,11 @@ class Tree
 
     return false
   end
-
+  
+  # rebalance method
+    # initialize variable for array returned by level_order method
+    # pass said array into build_tree method
+    
   def level_order
     return if root.nil?
 
