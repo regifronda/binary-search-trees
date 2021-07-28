@@ -1,15 +1,6 @@
-require 'pry-byebug'
-# Build a balanced BST
-  # Get the Middle of the array and make it root.
-  # Recursively do same for left half and right half.
-      # Get the middle of left half and make it left child of the root
-      # Get the middle of right half and make it right child of the root
-
 class Tree
   attr_accessor :array, :root, :find_node
-  # initialize with an array
   def initialize(array)
-  # has root instance variable
     @array = array
     @array = sort_array(@array)
     @root = build_tree(@array)
@@ -21,9 +12,6 @@ class Tree
     array = array.uniq
   end
 
-  # build_tree(array, start_index = nil, end = nil)
-    # set variable start_index to 0
-    # set end_index to = array.length - 1
   def build_tree(array, start_index = 0, end_index = array.length - 1)
     array = sort_array(array)
     return nil if (start_index > end_index)
@@ -35,31 +23,20 @@ class Tree
     return root
   end
 
-  # To insert a value in a balanced binary search tree,
-    # Start comparing the value to the root. If smaller, go to left subtree. If greater, right subtree
-    # the inserted value will always be the leaf of a tree
-    # So, when there's no left or right subtree, place a new node for the given value.
-    
-  # insert method that accepts a value to insert
   def insert(value, root = @root)
-    # If the subtree is empty, return a new node
     if root == nil
       root = Node.new(value)
     end
-    # Otherwise, continue recursing down the left subtree if the value is less than the root
     if value < root.data
       root.left = insert(value, root.left)
-    # recurse down the right subtree if the value is greater than the root
     elsif value > root.data
       root.right = insert(value, root.right)
     end
-    # return root
     return root
   end
 
   def next_biggest_node(node)
     current = node
-    # find the next biggest value by going to the far left of a subtree
     while current.left != nil
       current = current.left
     end
@@ -127,40 +104,23 @@ class Tree
     return root if root == nil
     
     if value < root.data
-      p "value: #{value}"
-      p "root.data: #{root.data}"
       root.left = delete(value, root.left)
     elsif value > root.data
-      puts "entered elsif value > root.data"
       root.right = delete(value, root.right)
     
     else
-      puts "entered else statement"
-      p "value: #{value}"
-      p "root.data: #{root.data}"
       if root.left == nil
-        puts "entered root.left if statement"
-        p "root.right: #{root.right}"
-        p "root.data: #{root.data}"
         root_right_placeholder = root.right
         root = nil
         return root_right_placeholder
       elsif root.right == nil
-        puts "entered root.right elsif statement"
-        p "root.left: #{root.left}"
-        p "root.data: #{root.data}"
         root_left_placeholder = root.left
         root = nil
         return root_left_placeholder
       end
 
-      # In the case of deleting a node with two children, find the next biggest value in its right subtree
       root_placeholder = next_biggest_node(root.right)
-      p "root_placeholder: #{root_placeholder}"
-      # Replace the node to be deleted with the next biggest
       root.data = root_placeholder.data
-      p "root_placeholder.data: #{root_placeholder.data}"
-      # Delete the next biggest node.
       root.right = delete(root_placeholder.data, root.right)
     end
     return root
