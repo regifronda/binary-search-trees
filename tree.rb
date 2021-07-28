@@ -43,6 +43,32 @@ class Tree
     return current
   end
 
+  def delete(value, root = @root)
+    return root if root == nil
+    
+    if value < root.data
+      root.left = delete(value, root.left)
+    elsif value > root.data
+      root.right = delete(value, root.right)
+    
+    else
+      if root.left == nil
+        root_right_placeholder = root.right
+        root = nil
+        return root_right_placeholder
+      elsif root.right == nil
+        root_left_placeholder = root.left
+        root = nil
+        return root_left_placeholder
+      end
+
+      root_placeholder = next_biggest_node(root.right)
+      root.data = root_placeholder.data
+      root.right = delete(root_placeholder.data, root.right)
+    end
+    return root
+  end
+  
   def inorder
     current = @root
     stack = []
@@ -100,31 +126,28 @@ class Tree
     p values.reverse  
   end
 
-  def delete(value, root = @root)
-    return root if root == nil
-    
-    if value < root.data
-      root.left = delete(value, root.left)
-    elsif value > root.data
-      root.right = delete(value, root.right)
-    
-    else
-      if root.left == nil
-        root_right_placeholder = root.right
-        root = nil
-        return root_right_placeholder
-      elsif root.right == nil
-        root_left_placeholder = root.left
-        root = nil
-        return root_left_placeholder
-      end
+  def level_order
+    return if root.nil?
 
-      root_placeholder = next_biggest_node(root.right)
-      root.data = root_placeholder.data
-      root.right = delete(root_placeholder.data, root.right)
+    discovered_nodes = Array.new
+    result = Array.new
+    discovered_nodes << @root
+
+    while discovered_nodes.length > 0
+      value_to_add_to_result = discovered_nodes[0]
+      value_to_add_to_result = value_to_add_to_result.data
+      result << value_to_add_to_result
+      node = discovered_nodes.shift
+      if node.left != nil
+        discovered_nodes << node.left
+      end
+      if node.right != nil
+        discovered_nodes << node.right
+      end
     end
-    return root
+    p result
   end
+
 
   def find(value, root = @root)
     if value < root.data
@@ -200,30 +223,6 @@ class Tree
     @array = level_order
     @array = sort_array(@array)
     @root = build_tree(@array)
-  end
-
-  def level_order
-    return if root.nil?
-
-    discovered_nodes = Array.new
-    result = Array.new
-    discovered_nodes << @root
-
-    while discovered_nodes.length > 0
-      value_to_add_to_result = discovered_nodes[0]
-      value_to_add_to_result = value_to_add_to_result.data
-      result << value_to_add_to_result
-      node = discovered_nodes.shift
-      if node.left != nil
-        # result << node.left
-        discovered_nodes << node.left
-      end
-      if node.right != nil
-        # result << node.right
-        discovered_nodes << node.right
-      end
-    end
-    p result
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
